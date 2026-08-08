@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 
 const projectDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const viewsDir = path.join(projectDir, "views");
-const outFile = path.join(projectDir, "docs", "catalog.js");
+const outFile = path.join(projectDir, "catalog.js");
 
 if (!fs.existsSync(viewsDir)) {
   console.error("No views directory found at " + viewsDir);
