@@ -4,7 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const projectDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const projectDir = path.dirname(fileURLToPath(import.meta.url));
 const viewsDir = path.join(projectDir, "views");
 const outFile = path.join(projectDir, "catalog.js");
 

@@ -5,7 +5,7 @@
 (function () {
   "use strict";
 
-  var DATA_BASE = "..";
+  var DATA_BASE = ".";
   var REPO_URL = "https://github.com/murat-soysal/iOSViews/";
   var THEME_KEY = "uiviews_theme";
   var SITE_TITLE = "iOSViews";
