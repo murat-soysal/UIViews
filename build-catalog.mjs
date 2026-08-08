@@ -1,5 +1,5 @@
-// Builds docs/catalog.js by scanning the top-level views/ folders.
-// Run with: node docs/build-catalog.mjs  (from the project root)
+// Builds catalog.js by scanning the top-level views/ folders.
+// Run with: node build-catalog.mjs  (from the project root)
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -25,7 +25,7 @@ for (const category of fs.readdirSync(viewsDir)) {
 }
 
 const js =
-  "/* Generated from views/ by docs/build-catalog.mjs — do not edit manually. */\n" +
+  "/* Generated from views/ by /build-catalog.mjs — do not edit manually. */\n" +
   "window.CATALOG = " + JSON.stringify(entries, null, 2) + ";\n";
 
 fs.writeFileSync(outFile, js);

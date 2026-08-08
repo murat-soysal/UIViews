@@ -1,4 +1,4 @@
-/* Generated from views/ by docs/build-catalog.mjs — do not edit manually. */
+/* Generated from views/ by /build-catalog.mjs — do not edit manually. */
 window.CATALOG = [
   {
     "slug": "duolingo-clone",
