@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>iOSViews - Explore SwiftUI Views</title>
+    <meta
+      name="description"
+      content="Browse beautiful iOS interfaces with source code."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: [
+                "Inter",
+                "-apple-system",
+                "BlinkMacSystemFont",
+                '"Segoe UI"',
+                "Roboto",
+                "sans-serif",
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+    <style>
+      .dark {
+        color-scheme: dark;
+      }
+      .code-scroll::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+      .code-scroll::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.18);
+        border-radius: 8px;
+        border: 2px solid transparent;
+        background-clip: content-box;
+      }
+      .dark .code-scroll::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      .sidebar-scroll::-webkit-scrollbar {
+        width: 6px;
+      }
+      .sidebar-scroll::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.15);
+        border-radius: 8px;
+      }
+      .dark .sidebar-scroll::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      .code-scroll .hljs-comment { color: #64748b; }
+      .code-scroll .hljs-keyword { color: #7c3aed; }
+      .code-scroll .hljs-string { color: #16a34a; }
+      .code-scroll .hljs-number { color: #d97706; }
+      .code-scroll .hljs-type,
+      .code-scroll .hljs-title { color: #0ea5e9; }
+      .code-scroll .hljs-meta { color: #c026d3; }
+      .dark .code-scroll .hljs-comment { color: #64748b; }
+      .dark .code-scroll .hljs-keyword { color: #a78bfa; }
+      .dark .code-scroll .hljs-string { color: #86efac; }
+      .dark .code-scroll .hljs-number { color: #fbbf24; }
+      .dark .code-scroll .hljs-type,
+      .dark .code-scroll .hljs-title { color: #7dd3fc; }
+      .dark .code-scroll .hljs-meta { color: #f9a8d4; }
+      @media (min-width: 1024px) {
+        .view-page {
+          min-height: calc(100dvh - 24px);
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="antialiased bg-[#e8ecf4] font-sans text-slate-800 selection:bg-blue-200/50 dark:bg-[#18181b] dark:text-slate-200"
+  >
+    <div class="flex flex-col">
+      <header
+        class="relative z-30 mx-3 mt-3 hidden rounded-2xl border border-black/5 bg-white/70 px-3 py-2.5 shadow-sm backdrop-blur-xl max-lg:block dark:border-white/10 dark:bg-[#262629]"
+      >
+        <div class="flex items-center justify-between gap-3">
+          <a href="#/all" class="flex items-center gap-2 text-[15px] font-bold text-slate-800 dark:text-slate-100">
+            <i data-lucide="rocket" class="h-4 w-4 text-blue-500"></i>
+            <span>iOS<span class="text-blue-500">Views</span></span>
+          </a>
+          <div class="flex items-center gap-2">
+            <button
+              type="button"
+              class="flex h-8 w-8 items-center justify-center rounded-[10px] border border-slate-400/20 bg-white/80 text-slate-500 shadow-sm transition hover:scale-105 hover:bg-white hover:text-zinc-600 dark:border-slate-400/30 dark:bg-[#3f3f46] dark:text-slate-300 dark:hover:bg-[#52525b] dark:hover:text-slate-100"
+              id="theme-toggle-header"
+              aria-label="Toggle theme"
+            >
+              <i data-lucide="moon" class="h-4 w-4"></i>
+            </button>
+            <button
+              type="button"
+              class="flex h-8 w-8 items-center justify-center rounded-[10px] border border-slate-400/20 bg-white/80 text-slate-500 shadow-sm transition hover:bg-white hover:text-zinc-600 dark:border-slate-400/30 dark:bg-[#3f3f46] dark:text-slate-300 dark:hover:bg-[#52525b] dark:hover:text-slate-100"
+              id="menu-toggle"
+              aria-label="Open menu"
+              aria-expanded="false"
+            >
+              <i data-lucide="menu" class="h-4 w-4"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div class="flex gap-3 p-3">
+        <div id="sidebar-overlay" hidden class="fixed inset-0 z-40 bg-slate-900/30"></div>
+
+        <aside
+          id="sidebar"
+          class="hidden shrink-0 flex-col py-4 px-2 rounded-3xl border border-black/5 bg-white/70 shadow-sm backdrop-blur-xl transition-transform duration-300 max-lg:fixed max-lg:inset-y-3 max-lg:left-3 max-lg:z-50 max-lg:w-[min(280px,calc(100vw-24px))] max-lg:-translate-x-[calc(100%+24px)] max-lg:[&.mobile-sidebar-open]:flex max-lg:[&.mobile-sidebar-open]:translate-x-0 lg:sticky lg:top-3 lg:h-[calc(100dvh-24px)] lg:flex lg:w-60 dark:border-white/10 dark:bg-[#262629]"
+        >
+          <div class="flex min-h-0 flex-1 flex-col">
+            <div class="sidebar-scroll min-h-0 flex-1 overflow-y-auto">
+              <div class="px-2.5">
+                <section
+                  class="rounded-2xl border border-white/70 bg-gradient-to-br from-slate-100 via-blue-50 to-purple-100 p-3.5 dark:border-white/20 dark:bg-[radial-gradient(circle_at_100%_0%,rgba(212,212,216,0.13),transparent_42%),linear-gradient(135deg,#27272a_0%,#303033_55%,#3f3f46_100%)] dark:shadow-xl"
+                >
+                  <div class="mb-1.5 flex items-center gap-1.5">
+                    <i data-lucide="rocket" class="h-4 w-4 text-blue-500"></i>
+                    <a href="#/all" class="text-sm font-bold text-slate-800 dark:text-slate-100">
+                      iOS<span class="text-blue-500">Views</span>
+                    </a>
+                  </div>
+                  <p class="text-[11.5px] leading-relaxed text-slate-500 dark:text-slate-300">
+                    Browse beautiful iOS interfaces with source code.
+                  </p>
+                </section>
+              </div>
+
+              <nav id="category-nav" class="mt-6 mb-6" aria-label="Categories"></nav>
+
+              <div class="px-2.5">
+                <a
+                  href="https://github.com/murat-soysal/iOSViews/"
+                  target="_blank"
+                  rel="noreferrer"
+                  class="flex items-center justify-center gap-2 rounded-full bg-blue-500 px-4 py-2.5 text-sm font-bold text-white shadow-[0_1px_3px_rgba(59,130,246,0.4)] transition-colors hover:bg-blue-600"
+                >
+                  <i data-lucide="cloud-upload" class="h-4 w-4"></i>
+                  Submit
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between gap-2 px-2.5 pt-3">
+              <p class="text-[10px] leading-snug text-slate-400 dark:text-slate-500">
+                All rights reserved.<br />
+                Not affiliated with Apple Inc.
+              </p>
+              <button
+                type="button"
+                class="flex h-8 w-8 shrink-0 items-center justify-center rounded-[10px] border border-slate-400/20 bg-white/80 text-slate-500 shadow-sm transition hover:scale-105 hover:bg-white hover:text-zinc-600 dark:border-slate-400/30 dark:bg-[#3f3f46] dark:text-slate-300 dark:hover:bg-[#52525b] dark:hover:text-slate-100"
+                id="theme-toggle-sidebar"
+                aria-label="Toggle theme"
+              >
+                <i data-lucide="moon" class="h-4 w-4"></i>
+              </button>
+            </div>
+          </div>
+        </aside>
+
+        <main
+          id="main-content"
+          class="min-w-0 flex-1 rounded-3xl border border-black/5 bg-white/70 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[#262629]"
+        ></main>
+      </div>
+    </div>
+
+    <script src="catalog.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
